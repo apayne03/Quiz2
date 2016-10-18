@@ -30,10 +30,11 @@ neuroticism <- psych::alpha(as.data.frame(neuroticism), check.keys=FALSE)$scores
 analytic_data <- cbind(categorical_variables, agreeableness, neuroticism, extraversion)
 
 # Creating Male and Female Subsets
-analytic_data_male <-  filter(analytic_data, sex=="Males")
-analytic_data_male <- select(analytic_data_male, -sex)
+analytic_data_male <-  filter(analytic_data, sex=="Males", age>"40")
+analytic_data_male <- select(analytic_data, -sex, -age)
 
 #Saving .RData, CSV, .SAV 
 write_csv(analytic_data,path="analytic_data.csv")
 
 apa.cor.table(analytic_data, filename="Table1.doc", table.number=1)
+apa.cor.table(analytic_data_male, filename = "Table2.doc", table.number=2)
